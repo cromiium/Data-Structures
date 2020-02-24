@@ -5,42 +5,43 @@ class Node:
         self.right = None
 
 class Tree:
-    def __init__(self,):
+    def __init__(self):
         self.root = None 
-    
-
-    def insert_node(self, data):
-        new_node = Node(data)
-
+#TODO: Add balancing
+    def __insert_node(self, root, data):
         if self.root == None:
-            self.root = new_node
-            return
+            self.root = Node(data)
+        elif root == None:
+            root = Node(data)
+        else:
+            if data <= root.data: 
+                root.left = self.__insert_node(root.left, data)
+            elif data > root.data:
+                root.right = self.__insert_node(root.right, data)
+        return root
+    def insert(self, data): # Wrapper function for __insert_node
+        self.__insert_node(self.root, data)
 
-        temp_root = self.root
-
-        if data <= temp_root.data:
-            while temp_root.left != None:
-                temp_root = temp_root.left
-            temp_root.left = new_node
-        
-        if data > temp_root.data:
-            while temp_root.right != None:
-                temp_root = temp_root.right
-            temp_root.right = new_node
-    
-    def inorder_tree(self, root):
+#TODO: Add remove
+#TODO: Number of Leaves
+#TODO: Find min/max
+#TODO: Print out all root-> leaf paths per line
+#TODO: Add preorder and postorder
+    def __inorder_tree(self, root): 
         if root == None:
             return
-        self.inorder_tree(root.left)
+        self.__inorder_tree(root.left)
         print(root.data)
-        self.inorder_tree(root.right)
+        self.__inorder_tree(root.right)
+    def inorder(self): # Wrapper functino for __inorder_tree
+        self.__inorder_tree(self.root)
 
 def main():
     tree1 = Tree()
-    tree1.insert_node(10)
-    tree1.insert_node(5)
-    tree1.insert_node(20)
-    tree1.insert_node(9)
-    tree1.insert_node(15)
-    tree1.inorder_tree(tree1.root)
+    tree1.insert(1)
+    tree1.insert(2)
+    tree1.insert(3)
+    tree1.insert(4)
+    tree1.insert(5)
+    tree1.inorder()
 main()
