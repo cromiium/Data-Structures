@@ -1,4 +1,4 @@
-# Data-Structures
+# DataStructures
 Different Data Structures and Data Structure related programs are in here
 
 * Linked List
